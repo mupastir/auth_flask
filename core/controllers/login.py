@@ -9,7 +9,7 @@ class LoginController(Controller):
 
     def login(self, username, user_id):
         user, errors = self.user_schema.load(user_id)
-        if errors:
+        if not errors:
             result_send = self.create_session(username, user)
             return result_send
         return self.failed_result()
