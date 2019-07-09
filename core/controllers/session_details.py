@@ -9,4 +9,4 @@ class SessionDetailsController(Controller):
         if not errors:
             session_details, errors = self.session_details_schema.dumps(session_details)
             return session_details
-        return 300
+        return errors

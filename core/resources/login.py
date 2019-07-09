@@ -1,9 +1,9 @@
 from core.resources.base import BaseResource
 from flask import make_response
-from core.data_api import AccessToUsers
+from core.utils.data_api import AccessToUsers
 from core.controllers.login import LoginController
-from core.resources.argument_parser import PARSER
-from constants import USERNAME
+from core.utils.argument_parser import PARSER
+from core.utils.constants import USERNAME
 
 
 class Login(BaseResource):

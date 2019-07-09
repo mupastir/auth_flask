@@ -3,7 +3,7 @@ from datetime import datetime
 from core.schemas.session import SessionSend
 from core.schemas.session_details import SessionDetails
 from core.controllers.base import Controller
-from constants import TTL, STATUS_FAILED, STATUS_SUCCESS
+from core.utils.constants import TTL, STATUS_FAILED, STATUS_SUCCESS
 
 
 

@@ -1,7 +1,7 @@
 from flask import make_response
 from core.resources.base import BaseResource
 from core.controllers.session_details import SessionDetailsController
-from core.resources.argument_parser import PARSER
+from core.utils.argument_parser import PARSER
 
 
 class SessionDetails(BaseResource):
