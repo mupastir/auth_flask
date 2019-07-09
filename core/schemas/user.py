@@ -7,4 +7,4 @@ class UserSchema(BaseSchema):
     username = fields.Str()
     email = fields.Str()
     user_address = fields.Str()
-    create_user_date = fields.DateTime()
+    create_user_date = fields.Str()

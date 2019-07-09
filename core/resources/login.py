@@ -1,4 +1,5 @@
 from core.resources.base import BaseResource
+from flask import make_response
 from core.data_api import AccessToUsers
 from core.controllers.login import LoginController
 from core.resources.argument_parser import PARSER
@@ -11,5 +12,7 @@ class Login(BaseResource):
         args = PARSER.parse_args()
         username = args[USERNAME]
         user_id = AccessToUsers.get(username)
-        login_controller = LoginController()
-        return login_controller.login(username, user_id)
+        status, sid= LoginController().login(user_id)
+        response = make_response(status)
+        response.headers.extend({'Session-ID': sid})
+        return response
