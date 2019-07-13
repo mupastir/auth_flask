@@ -3,7 +3,7 @@ from marshmallow import fields
 
 
 class UserSchema(BaseSchema):
-    id = fields.UUID()
+    user_id = fields.UUID()
     username = fields.Str()
     email = fields.Str()
     user_address = fields.Str()

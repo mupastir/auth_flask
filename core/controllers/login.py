@@ -1,10 +1,9 @@
 from uuid import uuid4
 from datetime import datetime
-from core.schemas.session import SessionSend
+from core.schemas.session_status import SessionStatusSend
 from core.schemas.session_details import SessionDetails
 from core.controllers.base import Controller
 from core.utils.constants import TTL, STATUS_FAILED, STATUS_SUCCESS
-
 
 
 class LoginController(Controller):
@@ -20,9 +19,9 @@ class LoginController(Controller):
         session_details = SessionDetails(user_info, datetime.now())
         session_details_dump, errors = self.session_details_schema.dumps(session_details)
         self.redis_client.set(sid, session_details_dump, ex=TTL)
-        session_status = SessionSend(STATUS_SUCCESS)
+        session_status = SessionStatusSend(STATUS_SUCCESS)
         return self.session_schema_send.dump(session_status), sid
 
     def failed_result(self):
-        session_status = SessionSend(STATUS_FAILED)
-        return self.session_schema_send.dump(session_status)
+        session_status = SessionStatusSend(STATUS_FAILED)
+        return self.session_schema_send.dump(session_status), None

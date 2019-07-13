@@ -9,7 +9,6 @@ class FlaskConfig:
     REDIS_PORT = 6379
     REDIS_DB = 0
     REDIS_PASSWORD = REDIS_PASS
-    # REDIS_URL = "redis://:redis@localhost:6379/0"
 
 
 def create_app():

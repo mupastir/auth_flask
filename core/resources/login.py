@@ -1,18 +1,20 @@
 from core.resources.base import BaseResource
-from flask import make_response
+from flask import make_response, request
 from core.utils.data_api import AccessToUsers
 from core.controllers.login import LoginController
-from core.utils.argument_parser import PARSER
-from core.utils.constants import USERNAME
+from marshmallow import ValidationError
 
 
 class Login(BaseResource):
 
     def post(self):
-        args = PARSER.parse_args()
-        username = args[USERNAME]
-        user_id = AccessToUsers.get(username)
-        status, sid= LoginController().login(user_id)
-        response = make_response(status)
-        response.headers.extend({'Session-ID': sid})
-        return response
+        data = request.get_json()
+        try:
+            self.session_id_schema.load(data)
+            user_id = AccessToUsers.get(data['username'], data['password'])
+            status, sid = LoginController().login(user_id)
+            response = make_response(status)
+            response.headers.extend({'Session-ID': sid})
+            return response
+        except ValidationError:
+            return 500

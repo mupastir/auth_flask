@@ -1,15 +1,19 @@
-from flask import make_response
+from flask import make_response, request
 from core.resources.base import BaseResource
 from core.controllers.session_details import SessionDetailsController
-from core.utils.argument_parser import PARSER
+from marshmallow import ValidationError
 
 
 class SessionDetails(BaseResource):
 
     def get(self):
-        args = PARSER.parse_args()
-        sid = str(args['sid'])
-        session_details = SessionDetailsController().get_details(sid)
-        response = make_response(session_details)
-        response.headers.extend({'Session-ID': sid})
-        return response
+        data = request.get_json()
+        try:
+            self.session_id_schema.load(data)
+            sid = data['sid']
+            session_details = SessionDetailsController().get_details(sid)
+            response = make_response(session_details)
+            response.headers.extend({'Session-ID': sid})
+            return response
+        except ValidationError:
+            return 500
