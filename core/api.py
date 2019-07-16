@@ -1,8 +1,8 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from core.resources.login import Login
-from core.resources.session_details import SessionDetails
+from core.resources.resources import Login, SessionDetails
+
 
 api_auth_blueprint = Blueprint('auth', __name__)
 api_auth = Api(api_auth_blueprint)
