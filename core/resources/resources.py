@@ -11,13 +11,17 @@ class Login(BaseResource):
         data = request.get_json()
         try:
             self.session_id_schema.load(data)
+        except ValidationError:
+            return {
+                'Status': 'failed'
+            }, 300
+        finally:
             user_id = AccessToUsers.get(data['username'], data['password'])
             status, sid = LoginController().login(user_id)
-            response = make_response(status)
-            response.headers.extend({'Session-ID': sid})
-            return response
-        except ValidationError:
-            return 500
+            return {
+                       'Status': status,
+                       'Session-ID': sid
+                   }, 200
 
 
 class SessionDetails(BaseResource):
@@ -26,10 +30,11 @@ class SessionDetails(BaseResource):
         data = request.get_json()
         try:
             self.session_id_schema.load(data)
+        except ValidationError:
+            return {
+                       'Status': 'failed'
+                   }, 300
+        finally:
             sid = data['sid']
             session_details = SessionDetailsController().get_details(sid)
-            response = make_response(session_details)
-            response.headers.extend({'Session-ID': sid})
-            return response
-        except ValidationError:
-            return 500
+            return session_details, 200
