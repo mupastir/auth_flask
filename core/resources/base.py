@@ -1,6 +1,5 @@
 from flask_restful import Resource
-from core.schemas.login import LoginSchema
-from core.schemas.session_id import SessionIDSchema
+from core.schemas.schemas import LoginSchema, SessionIDSchema
 
 
 class BaseResource(Resource):
@@ -8,3 +7,4 @@ class BaseResource(Resource):
     def __init__(self):
         self.login_schema = LoginSchema()
         self.session_id_schema = SessionIDSchema()
+        super(BaseResource, self).__init__()

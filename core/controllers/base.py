@@ -1,6 +1,4 @@
-from core.schemas.session_status import SessionStatusSchema
-from core.schemas.session_details import SessionDetailsSchema
-from core.schemas.user import UserSchema
+from core.schemas.schemas import SessionStatusSchema, SessionDetailsSchema, UserSchema
 from flask import current_app
 
 
