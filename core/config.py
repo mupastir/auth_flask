@@ -5,10 +5,13 @@ from deploy_keys import REDIS_PASS
 
 
 class Config:
-    REDIS_HOST = 'localhost'
-    REDIS_PORT = 6379
-    REDIS_DB = 0
-    REDIS_PASSWORD = REDIS_PASS
+    REDIS_HOST = os.environ.get('DB_HOST', 'localhost')
+    REDIS_PORT = os.environ.get('DB_PORT', 6379)
+    REDIS_DB = os.environ.get('DEFAULT_DB', 0)
+    REDIS_PASSWORD = os.environ.get('DB_PASSWORD', REDIS_PASS)
+    DEBUG = Flase
+    LOG_LEVEL = logging.INFO
+    REDIS_URI = 'redis://:{password}@{host}:{port}/{db_name}'
 
 
 class DevConfig(Config):
