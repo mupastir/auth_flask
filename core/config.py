@@ -1,15 +1,14 @@
 import os
 import logging
 from core.constants import APP_ENV_DEV, APP_ENV_PROD
-from deploy_keys import REDIS_PASS
 
 
 class Config:
     REDIS_HOST = os.environ.get('DB_HOST', 'localhost')
     REDIS_PORT = os.environ.get('DB_PORT', 6379)
     REDIS_DB = os.environ.get('DEFAULT_DB', 0)
-    REDIS_PASSWORD = os.environ.get('DB_PASSWORD', REDIS_PASS)
-    DEBUG = Flase
+    REDIS_PASSWORD = os.environ.get('DB_PASSWORD', 'redis')
+    DEBUG = False
     LOG_LEVEL = logging.INFO
     REDIS_URI = 'redis://:{password}@{host}:{port}/{db_name}'
 
