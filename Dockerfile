@@ -16,6 +16,3 @@ COPY . /services
 RUN apk --no-cache add libpq
 WORKDIR /services
 
-CMD ["python3", "manage.py", "runserver", "5050"]
-
-
