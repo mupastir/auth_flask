@@ -1,16 +1,15 @@
 import requests
 import json
-from uuid import uuid4
-from datetime import datetime
+from core.constants import USERS_URL
 
 
 class AccessToUsers:
 
     @staticmethod
-    def get(username, password):
+    def post(username, password):
         params = json.dumps({
             'username': username,
             'password': password
         })
-        response = requests.get('http://localhost:5000/user/', params=params)
+        response = requests.post(USERS_URL, params=params)
         return response

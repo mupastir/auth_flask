@@ -1,5 +1,5 @@
 from core.resources.base import BaseResource
-from flask import make_response, request
+from flask import request
 from core.utils.data_api import AccessToUsers
 from core.controllers.controllers import LoginController, SessionDetailsController
 from marshmallow import ValidationError

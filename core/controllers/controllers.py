@@ -2,7 +2,7 @@ from uuid import uuid4
 from datetime import datetime
 from core.schemas.schemas import SessionStatusSend, SessionDetails
 from core.controllers.base import Controller
-from core.utils.constants import TTL, STATUS_FAILED, STATUS_SUCCESS
+from core.constants import TTL, STATUS_FAILED, STATUS_SUCCESS
 
 
 class LoginController(Controller):
