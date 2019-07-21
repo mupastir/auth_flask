@@ -1,7 +1,3 @@
-# SEND_STATUSES
-STATUS_SUCCESS = 'success'
-STATUS_FAILED = 'failed'
-
 # SESSION TIME 15 minutes
 TTL = 900
 

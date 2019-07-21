@@ -1,5 +1,6 @@
 import os
 import logging
+
 from core.constants import APP_ENV_DEV, APP_ENV_PROD
 
 
@@ -9,16 +10,18 @@ class Config:
     REDIS_DB = os.environ.get('DEFAULT_DB', 0)
     REDIS_PASSWORD = os.environ.get('DB_PASSWORD', 'redis')
     DEBUG = False
+    HOST = '127.0.0.1'
     LOG_LEVEL = logging.INFO
+    TOKEN = os.environ.get('TOKEN', None)
     REDIS_URI = 'redis://:{password}@{host}:{port}/{db_name}'
-
-
-class DevConfig(Config):
-    DEBUG = True
 
 
 class ProdConfig(Config):
     LOG_LEVEL = logging.ERROR
+
+
+class DevConfig(Config):
+    DEBUG = True
 
 
 def runtime_config():

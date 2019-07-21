@@ -4,15 +4,9 @@ from marshmallow import fields
 
 class SessionDetails:
 
-    def __init__(self, user_info, session_create_date):
-        self.user_info = user_info
+    def __init__(self, user_information, session_create_date):
+        self.user_info = user_information
         self.session_create_date = session_create_date
-
-
-class SessionStatusSend:
-
-    def __init__(self, status):
-        self.status = status
 
 
 class SessionStatusSchema(BaseSchema):
@@ -25,7 +19,7 @@ class LoginSchema(BaseSchema):
 
 
 class UserSchema(BaseSchema):
-    user_id = fields.UUID()
+    user_id = fields.Str()
     username = fields.Str()
     email = fields.Str()
     user_address = fields.Str()
@@ -36,6 +30,8 @@ class SessionIDSchema(BaseSchema):
     sid = fields.Str()
     user_info = fields.Nested(UserSchema)
 
+
 class SessionDetailsSchema(BaseSchema):
-    session_create_date = fields.DateTime()
+    user_info = fields.Nested(UserSchema)
+    session_create_date = fields.Date()
 

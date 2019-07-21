@@ -12,16 +12,11 @@ class Login(BaseResource):
         try:
             self.session_id_schema.load(data)
         except ValidationError:
-            return {
-                'Status': 'failed'
-            }, 300
+            return 'wrong input data, please try again', 400
         finally:
-            user_id = AccessToUsers.get(data['username'], data['password'])
-            status, sid = LoginController().login(user_id)
-            return {
-                       'Status': status,
-                       'Session-ID': sid
-                   }, 200
+            user_id = AccessToUsers.post(data['username'], data['password'])
+            login_controller = LoginController()
+            return login_controller.login(user_id)
 
 
 class SessionDetails(BaseResource):
@@ -31,10 +26,8 @@ class SessionDetails(BaseResource):
         try:
             self.session_id_schema.load(data)
         except ValidationError:
-            return {
-                       'Status': 'failed'
-                   }, 300
+            return 'wrong data', 300
         finally:
             sid = data['sid']
-            session_details = SessionDetailsController().get_details(sid)
-            return session_details, 200
+            session_details_controller = SessionDetailsController()
+            return session_details_controller.get_details(sid)
