@@ -26,7 +26,7 @@ class SessionDetails(BaseResource):
         try:
             self.session_id_schema.load(data)
         except ValidationError:
-            return 'wrong data', 300
+            return 'wrong data', 400
         finally:
             sid = data['sid']
             session_details_controller = SessionDetailsController()
