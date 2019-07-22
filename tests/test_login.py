@@ -1,15 +1,14 @@
 import pytest
+import requests
+
 import json
 from uuid import uuid4
+from tests.conftest import USER_INFO
+from core.constants import USERS_URL
 
-def test_login(client):
+
+def test_login(client, requests_mock):
+    requests_mock.get(USERS_URL, text=USER_INFO)
     assert client.post('/auth/login').status_code == 200
 
 
-user_id = json.dumps({
-                "user_id": str(uuid4()),
-                "username": "oleg",
-                "email": "oleg@example.ru",
-                "user_address": "Paramonova 27A/3",
-                "create_user_date": "27.5.1"
-        })
