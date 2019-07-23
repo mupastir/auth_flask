@@ -16,7 +16,7 @@ class Login(BaseResource):
         finally:
             user_id = AccessToUsers.post(data['username'], data['password'])
             login_controller = LoginController()
-            return login_controller.login(user_id)
+            return login_controller.login(user_id.text)
 
 
 class SessionDetails(BaseResource):

@@ -6,5 +6,5 @@ APP_ENV_DEV = "dev"
 APP_ENV_PROD = "prod"
 
 # USERS ADDRESS
-USERS_URL = 'http://localhost:5000/user/'
+USERS_URL = 'http://localhost:6000/users/api/authentication'
 

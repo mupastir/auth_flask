@@ -11,5 +11,5 @@ class AccessToUsers:
             'username': username,
             'password': password
         })
-        response = requests.post(USERS_URL, params=params)
+        response = requests.post(USERS_URL, json=params)
         return response
