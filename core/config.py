@@ -13,7 +13,7 @@ class Config:
     HOST = '127.0.0.1'
     LOG_LEVEL = logging.INFO
     TOKEN = os.environ.get('TOKEN', None)
-    REDIS_URI = 'redis://:{password}@{host}:{port}/{db_name}'
+    REDIS_URL = f'redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}'
 
 
 class ProdConfig(Config):
