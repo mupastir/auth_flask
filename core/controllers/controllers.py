@@ -1,3 +1,4 @@
+from marshmallow import ValidationError
 from uuid import uuid4
 from datetime import datetime
 from core.schemas.schemas import SessionDetails
@@ -9,15 +10,24 @@ class LoginController(Controller):
 
     def login(self, user_id):
         user, errors = self.user_schema.loads(user_id)
-        if not errors:
+        print(type(user_id), user, errors)
+        if not errors and user:
             return self._create_session(user)
         return 'user does\'nt exist', 400
+        # user = {}
+        # try:
+        #     user = self.user_schema.loads(user_id)
+        # except ValidationError:
+        #     return 'user does\'nt exist', 400
+        # finally:
+        #     return self._create_session(user)
+
+
 
     def _create_session(self, user_info):
         sid = uuid4()
         session_details = SessionDetails(user_info, datetime.utcnow())
-        session_details_dump, errors = self.session_details_schema.dumps(session_details)
-        print(session_details_dump)
+        session_details_dump = self.session_details_schema.dumps(session_details)
         self.redis_client.set(str(sid), session_details_dump, ex=TTL)
         return sid, 200
 

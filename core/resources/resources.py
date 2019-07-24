@@ -10,13 +10,13 @@ class Login(BaseResource):
     def post(self):
         data = request.get_json()
         try:
-            self.session_id_schema.load(data)
+            data = self.login_schema.load(data)
         except ValidationError:
             return 'wrong input data, please try again', 400
         finally:
             user_id = AccessToUsers.post(data['username'], data['password'])
             login_controller = LoginController()
-            return login_controller.login(user_id.text)
+            return login_controller.login(user_id)
 
 
 class SessionDetails(BaseResource):

@@ -14,16 +14,16 @@ class SessionStatusSchema(BaseSchema):
 
 
 class LoginSchema(BaseSchema):
-    username = fields.Str()
-    password = fields.Str()
+    username = fields.Str(required=True)
+    password = fields.Str(required=True)
 
 
 class UserSchema(BaseSchema):
-    user_id = fields.Str()
-    username = fields.Str()
-    email = fields.Str()
-    user_address = fields.Str()
-    create_user_date = fields.Str()
+    user_id = fields.Str(required=True)
+    username = fields.Str(required=True)
+    email = fields.Str(required=True)
+    user_address = fields.Str(required=True)
+    create_user_date = fields.Str(required=True)
 
 
 class SessionIDSchema(BaseSchema):

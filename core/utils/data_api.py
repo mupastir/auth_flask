@@ -12,4 +12,4 @@ class AccessToUsers:
             'password': password
         })
         response = requests.post(USERS_URL, json=params)
-        return response
+        return response.text
